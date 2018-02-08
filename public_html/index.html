@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>OptiMiam</h1>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Recherche</h3>
+                            <select class="selectpicker" id="search" data-show-subtext="false" data-live-search="true" title="Search..." multiple>
+                                <optgroup label="Aliments">
+                                    <option>Carotte</option>
+                                    <option>Pomme de terre</option>
+                                    <option>Escalope de dinde</option>
+                                    <option>Filet de poulet</option>
+                                    <option>Viande hachée</option>
+                                    <option>Pates</option>
+                                    <option>Semoule</option>
+                                    <option>Panga</option>
+                                    <option>Laitue</option>
+                                    <option>Poireau</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Plats</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="receipt.html">Beignet courgette parmesan</a></li>
+                                <li class="list-group-item"><a href="#">Gratin cabillaud épinards</a></li>
+                                <li class="list-group-item"><a href="#">Soufflé radis noir</a></li>
+                                <li class="list-group-item"><a href="#">Lasagne saumon poireaux</a></li>
+                                <li class="list-group-item"><a href="#">Paupiette veau choux fleur</a></li>
+                                <li class="list-group-item"><a href="#">Cordon bleu</a></li>
+                                <li class="list-group-item"><a href="#">Poilée thaï</a></li>
+                                <li class="list-group-item"><a href="#">Blanquette poulet salsifis</a></li>
+                                <li class="list-group-item"><a href="#">Cake jambon chevre</a></li>
+                                <li class="list-group-item"><a href="#">Gnocchis</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+                    <a href="addfood.html">Ajouter un aliment</a><br/>
+                    <a href="ajout_plat.html">Ajouter un plat</a>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+        <script>
+            var selected = [];
+
+            $(document).ready(function () {
+                console.log("ready!");
+                $('.selectpicker').selectpicker({val: ['Carotte']}).on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+                    selected[clickedIndex] = newValue;
+                    debug(selected);
+                });
+            });
+            function debug(something)
+            {
+                console.log(JSON.stringify(something));
+            }
+        </script>
+    </body>
+</html>

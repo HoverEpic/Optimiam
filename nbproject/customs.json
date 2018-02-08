@@ -1,0 +1,11 @@
+{
+    "elements": {},
+    "attributes": {
+        "integrity": {
+            "context": "link"
+        },
+        "w3-include-html": {
+            "context": "div"
+        }
+    }
+}

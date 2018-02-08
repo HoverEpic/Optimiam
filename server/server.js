@@ -1,0 +1,92 @@
+'use strict';
+
+// Constants
+const PORT = 80;
+const HOST = '0.0.0.0';
+
+var express = require('express');
+var path = require('path');
+var app = express();
+// enable public html
+app.use(express.static(path.join(__dirname, 'public')));
+// enable POST request decoding
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());     // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+    extended: true
+}));
+var mysql = require('mysql');
+var pool = mysql.createPool({
+    connectionLimit: 10,
+    host: 'mysql',
+    user: 'root',
+    password: 'root',
+    database: 'optimiam'
+});
+
+pool.getConnection(function (err, connection) {
+    if (err)
+        throw err;
+    console.log("Connected to MYSQL server !");
+    pool.query('SELECT COUNT(*) AS `count` FROM food', function (err, rows, fields) {
+        if (err)
+            throw err;
+        console.log(rows[0].count + " registered foods !");
+    });
+    pool.query('SELECT COUNT(*) AS `count` FROM receipts', function (err, rows, fields) {
+        if (err)
+            throw err;
+        console.log(rows[0].count + " registered receips !");
+    });
+    console.log("Ready to handle queries.");
+});
+
+// DEBUG
+//pool.on('acquire', function (connection) {
+//  console.log('Connection %d acquired', connection.threadId);
+//});
+//pool.on('connection', function (connection) {
+//  connection.query('SET SESSION auto_increment_increment=1')
+//});
+//pool.on('enqueue', function () {
+//  console.log('Waiting for available connection slot');
+//});
+//pool.on('release', function (connection) {
+//  console.log('Connection %d released', connection.threadId);
+//});
+
+// App
+app.get('/api/v1/foods', (req, res) => {
+    pool.query('SELECT * FROM food', function (err, rows, fields) {
+        if (err)
+            throw err;
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(rows));
+    });
+});
+
+app.post('/api/v1/foods/add', (req, res) => {
+    console.log("Request : " + JSON.stringify(req.body));
+    // example
+    var name = req.body.name || "null";
+    console.log("Name : " + name);
+    // insert in database
+//    pool.query('SELECT * FROM food', function (err, rows, fields) {
+//        if (err)
+//            throw err;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({message: 'food add ok !'}));
+//    });
+});
+
+app.get('/api/v1/receipts', (req, res) => {
+    pool.query('SELECT * FROM receipts', function (err, rows, fields) {
+        if (err)
+            throw err;
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(rows));
+    });
+});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);

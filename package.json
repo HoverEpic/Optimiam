@@ -1,0 +1,22 @@
+{
+  "name": "Optimiam",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Epic",
+  "contributors": [],
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "license": "ISC",
+  "description": ""
+}

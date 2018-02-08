@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <h1><a href="index.html">OptiMiam</a>/<a href="foods.html">Aliments</a>/ajout</h1>
+
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <label for="name">Nom : </label>
+                            <input type="text" class="form-control" id="name">
+                            <br>
+                            <label for="country">Pays : </label>
+                            <input type="text" class="form-control" id="country">
+                            <br>
+                            <label for="date">dates de récolte : </label>
+                            <div class="row">
+                                <div class="col-md-2 form-check" style="display: inline">
+                                    <input type="checkbox" class="form-check-input" id="allYear">
+                                    <label class="form-check-label" for="allYear">Toute l'année</label>
+                                </div>
+                                <div class="col-md-5" style="display: inline">
+                                    <select class="selectpicker" id="month-from" data-show-subtext="false" data-live-search="true" title="Selectionez des mois" multiple>
+                                        <option>Janvier</option>
+                                        <option>Février</option>
+                                        <option>Mars</option>
+                                        <option>Avril</option>
+                                        <option>Mai</option>
+                                        <option>Juin</option>
+                                        <option>Juillet</option>
+                                        <option>Aout</option>
+                                        <option>Septembre</option>
+                                        <option>Octobre</option>
+                                        <option>Novembre</option>
+                                        <option>Decembre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <label for="shop">magasin : </label>
+                            <select class="selectpicker" id="shop" data-show-subtext="false" data-live-search="true">
+                                <option value="0">Terre de ferme</option>
+                                <option value="1">Super U</option>
+                                <option value="2">Sur la branche</option>
+                                <option value="3">Marché</option>
+                            </select>
+                            <br>
+                            <label for="time">Conservation : </label>
+                            <input type="text" class="form-control" id="time">
+                            <br>
+                            <label for="type">Type:</label>
+                            <select class="selectpicker" id="type" data-show-subtext="false" data-live-search="true">
+                                <option data-subtext="" class="btn-success btn-sm">Féculent</option>
+                                <option data-subtext="" class="btn-warning btn-sm">Légume</option>
+                                <option data-subtext="" class="btn-danger btn-sm">Protéine</option>
+                            </select>
+                            <br>
+                            <label for="comment">Comment : </label>
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <br>
+                            <input type="submit" class="btn btn-primary" id="submit" value="Ajouter"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+        <script>
+            $(function () {
+                console.log("ready!");
+                $("#submit").click(function () {
+                    var data = {
+                        name: $("#name").val(),
+                        country: $("#country").val(),
+                        harvest_from: "",
+                        harvest_to: "",
+                        shop: $("#shop").selectpicker('val'),
+                        retention: $("#time").val(),
+                        type: $("#type").val(),
+                        comment: $("#comment").val()
+                    }
+                    console.log("clicked!");
+                    $.ajax({
+                        url: '/api/v1/foods/add',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data)}
+                    )
+                });
+            });
+        </script>
+    </body>
+</html>

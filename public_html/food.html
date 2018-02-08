@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    </head>
+    <body style="background-color: #b9bbbe">
+        <!--  -->
+        <style>
+            input[type=text].search {
+                display: inline;
+                width: 130px;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 14px;
+                background-color: white;
+                background-image: url(img/searchicon.png);
+                background-position: 3px 3px;
+                background-repeat: no-repeat;
+                padding: 6px 20px 0px 40px;
+                -webkit-transition: width .2s ease-in-out;
+                transition: width .2s ease-in-out;
+            }
+
+            /* When the input field gets focus, change its width to 100% */
+            input[type=text]:focus {
+                width: 70%;
+            }
+        </style>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1><a href="index.html">OptiMiam</a>/<a href="foods.html">Aliments</a>/Carotte</h1>
+                    <pre>Bibliotheque d'aliments et de plats</pre>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Informations</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item">Pays de production : France</li>
+                                <li class="list-group-item">Date de récolte : toute l'année</li>
+                                <li class="list-group-item">Magasin : <a href="index.html">Terre de ferme</a></li>
+                                <li class="list-group-item">Temps de concervation : 3 semaines</li>
+                                <li class="list-group-item">Type d'aliment: <a href="index.html">légume</a></li>
+                            </ul>
+                            <hr/>
+                            <div class="alert alert-secondary" role="alert">
+                                La carotte est une plante bisannuelle de la famille des apiacées, largement cultivée pour sa racine pivotante charnue, comestible, de couleur généralement orangée, consommée comme légume. C'est une racine riche en carotène.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Plats <input style="display: inline" type="text" class="form-control search" name="search" placeholder="Search.."></h3>
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="#">Beignet courgette parmesan</a></li>
+                                <li class="list-group-item"><a href="#">Gratin cabillaud épinards</a></li>
+                                <li class="list-group-item"><a href="#">Soufflé radis noir</a></li>
+                                <li class="list-group-item"><a href="#">Lasagne saumon poireaux</a></li>
+                                <li class="list-group-item"><a href="#">Paupiette veau choux fleur</a></li>
+                                <li class="list-group-item"><a href="#">Cordon bleu</a></li>
+                                <li class="list-group-item"><a href="#">Poilée thaï</a></li>
+                                <li class="list-group-item"><a href="#">Blanquette poulet salsifis</a></li>
+                                <li class="list-group-item"><a href="#">Cake jambon chevre</a></li>
+                                <li class="list-group-item"><a href="#">Gnocchis</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    </body>
+</html>
