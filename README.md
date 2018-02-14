@@ -1,4 +1,4 @@
-#OPTIMIAM
+# OPTIMIAM
 Dockerized web application base on nodejs, used to store our home food receipts,
 hosted on a RaspberryPi @ home.
 

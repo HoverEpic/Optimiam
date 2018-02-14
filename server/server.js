@@ -39,6 +39,7 @@ pool.getConnection(function (err, connection) {
         console.log(rows[0].count + " registered receips !");
     });
     console.log("Ready to handle queries.");
+    connection.release();
 });
 
 // DEBUG
@@ -65,18 +66,72 @@ app.get('/api/v1/foods', (req, res) => {
     });
 });
 
-app.post('/api/v1/foods/add', (req, res) => {
-    console.log("Request : " + JSON.stringify(req.body));
-    // example
-    var name = req.body.name || "null";
-    console.log("Name : " + name);
+app.get('/api/v1/shops', (req, res) => {
+    pool.query('SELECT * FROM shops', function (err, rows, fields) {
+        if (err)
+            throw err;
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(rows));
+    });
+});
+
+app.get('/api/v1/tools', (req, res) => {
+    pool.query('SELECT * FROM tools', function (err, rows, fields) {
+        if (err)
+            throw err;
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(rows));
+    });
+});
+
+app.post('/api/v1/food/add', (req, res) => {
+    var data = {
+        name: req.body.name,
+        country: req.body.country,
+        harvest: req.body.harvest || 0,
+        shop: req.body.shop,
+        retention: req.body.retention,
+        type: req.body.type,
+        comment: req.body.comment
+    };
     // insert in database
-//    pool.query('SELECT * FROM food', function (err, rows, fields) {
-//        if (err)
-//            throw err;
+    var query = pool.query('INSERT INTO food SET ?', data, function (error, results, fields) {
+        if (error)
+            throw error;
+        // Neat!
+    });
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({message: 'food add ok !'}));
-//    });
+});
+
+app.post('/api/v1/shop/add', (req, res) => {
+    var data = {
+        name: req.body.name,
+        comment: req.body.comment
+    };
+    // insert in database
+    var query = pool.query('INSERT INTO shops SET ?', data, function (error, results, fields) {
+        if (error)
+            throw error;
+        // Neat!
+    });
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({message: 'food add ok !'}));
+});
+
+app.post('/api/v1/tool/add', (req, res) => {
+    var data = {
+        name: req.body.name,
+        comment: req.body.comment
+    };
+    // insert in database
+    var query = pool.query('INSERT INTO tools SET ?', data, function (error, results, fields) {
+        if (error)
+            throw error;
+        // Neat!
+    });
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({message: 'food add ok !'}));
 });
 
 app.get('/api/v1/receipts', (req, res) => {
@@ -87,6 +142,15 @@ app.get('/api/v1/receipts', (req, res) => {
         res.send(JSON.stringify(rows));
     });
 });
+
+// Functions
+function getMonths(bitmask) { // WARNING, months are adressed from 0 to 11
+    var months = [];
+    for (var i = 0; i < 12; i++) {
+        months[i] = (bitmask & 2 ** i) !== 0;
+    }
+    return months
+}
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
